@@ -19,7 +19,9 @@
   roles:
     - manala.apt
 
-  tasks:
+  post_tasks:
+
+    # Asserts
     - assert:
         that:
           - "{{

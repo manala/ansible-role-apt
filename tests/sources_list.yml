@@ -12,7 +12,7 @@
   roles:
     - manala.apt
 
-  tasks:
+  post_tasks:
 
     # Goss
     - name: Goss
