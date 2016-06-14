@@ -74,6 +74,20 @@ lint:
 # Test #
 ########
 
+test@wheezy: DEBIAN_DISTRIBUTION = wheezy
+test@wheezy: DOCKER_COMMAND      = make test
+test@wheezy:
+	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
+	$(DOCKER)
+
+test@jessie: DEBIAN_DISTRIBUTION = jessie
+test@jessie: DOCKER_COMMAND      = make test
+test@jessie:
+	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
+	$(DOCKER)
+
+test: test-dependencies test-sources-list test-preferences test-repositories test-keys test-keys-sni
+
 test-dependencies:
 	ansible-playbook tests/dependencies.yml --syntax-check
 	ansible-playbook tests/dependencies.yml
