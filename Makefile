@@ -15,8 +15,8 @@ DOCKER = docker run \
     --volume `pwd`:/etc/ansible/roles/${ROLE_NAME} \
     --volume `pwd`:/srv \
     --workdir /srv \
-    --tty \
-    --interactive \
+		--tty \
+    ${DOCKER_OPTIONS} \
     manala/ansible-debian:${DEBIAN_DISTRIBUTION} \
     ${DOCKER_COMMAND}
 
@@ -51,24 +51,49 @@ dev@wheezy:
 	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
 	$(DOCKER)
 
-#########
-# Tests #
-#########
+########
+# Lint #
+########
+
+lint@wheezy: DEBIAN_DISTRIBUTION = wheezy
+lint@wheezy: DOCKER_COMMAND      = make lint
+lint@wheezy:
+	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
+	$(DOCKER)
+
+lint@jessie: DEBIAN_DISTRIBUTION = jessie
+lint@jessie: DOCKER_COMMAND      = make lint
+lint@jessie:
+	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
+	$(DOCKER)
+
+lint:
+	ansible-lint -v .
+
+########
+# Test #
+########
 
 test-dependencies:
+	ansible-playbook tests/dependencies.yml --syntax-check
 	ansible-playbook tests/dependencies.yml
 
 test-sources-list:
+	ansible-playbook tests/sources_list.yml --syntax-check
 	ansible-playbook tests/sources_list.yml
 
 test-preferences:
+	ansible-playbook tests/preferences.yml --syntax-check
 	ansible-playbook tests/preferences.yml
 
 test-repositories:
+	ansible-playbook tests/repositories.yml --syntax-check
 	ansible-playbook tests/repositories.yml
 
 test-keys:
+	ansible-playbook tests/keys.yml --syntax-check
 	ansible-playbook tests/keys.yml
 
 test-keys-sni:
+	ansible-playbook tests/keys_sni.yml --syntax-check
 	ansible-playbook tests/keys_sni.yml
