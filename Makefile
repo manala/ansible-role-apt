@@ -39,15 +39,17 @@ help:
 # Dev #
 #######
 
-dev@jessie: DEBIAN_DISTRIBUTION = jessie
-dev@jessie: DOCKER_COMMAND      = /bin/bash
-dev@jessie:
+dev@wheezy: DEBIAN_DISTRIBUTION = wheezy
+dev@wheezy: DOCKER_OPTIONS      = --interactive
+dev@wheezy: DOCKER_COMMAND      = /bin/bash
+dev@wheezy:
 	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
 	$(DOCKER)
 
-dev@wheezy: DEBIAN_DISTRIBUTION = wheezy
+dev@jessie: DEBIAN_DISTRIBUTION = jessie
+dev@jessie: DOCKER_OPTIONS      = --interactive
 dev@jessie: DOCKER_COMMAND      = /bin/bash
-dev@wheezy:
+dev@jessie:
 	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
 	$(DOCKER)
 
