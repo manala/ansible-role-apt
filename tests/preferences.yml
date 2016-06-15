@@ -41,13 +41,13 @@
               {
                 'file': 'git',
                 'package': 'git git-*',
-                'pin': 'release a=jessie-backports',
+                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
                 'priority': 900
               },
               {
                 'file': 'foo',
                 'package': '*',
-                'pin': 'release a=jessie-backports',
+                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
                 'priority': 900
               },
               {

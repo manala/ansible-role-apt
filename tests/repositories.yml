@@ -54,29 +54,29 @@
                   'id': '5072E1F5',
                   'url': 'http://pgp.mit.edu/pks/lookup?op=get&search=0x8C718D3B5072E1F5'
                 },
-                'source': 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main'
+                'source': 'deb http://apt.postgresql.org/pub/repos/apt/ ' ~ ansible_distribution_release ~ '-pgdg main'
               },
               {
                 'key': 'dotdeb',
-                'source': 'deb http://packages.dotdeb.org jessie all'
+                'source': 'deb http://packages.dotdeb.org ' ~ ansible_distribution_release ~ ' all'
               },
               {
                 'key': 'bearstech',
-                'source': 'deb http://deb.bearstech.com/debian jessie-bearstech main'
+                'source': 'deb http://deb.bearstech.com/debian ' ~ ansible_distribution_release ~ '-bearstech main'
               },
               {
                 'source': 'deb http://packages.elastic.co/elasticsearch/1.7/debian stable main'
               },
               {
-                'pin': 'release a=jessie-backports',
-                'source': 'deb http://httpredir.debian.org/debian jessie-backports main'
+                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
+                'source': 'deb http://httpredir.debian.org/debian ' ~ ansible_distribution_release ~ '-backports main'
               },
               {
                 'key': 'nginx',
-                'source': 'deb http://nginx.org/packages/debian/ jessie nginx'
+                'source': 'deb http://nginx.org/packages/debian/ ' ~ ansible_distribution_release ~ ' nginx'
               },
               {
-                'source': 'deb http://security.debian.org/ jessie/updates main'
+                'source': 'deb http://security.debian.org/ ' ~ ansible_distribution_release ~ '/updates main'
               }
             ]
           }}"

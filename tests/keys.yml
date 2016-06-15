@@ -35,7 +35,7 @@
       - sensu
       - sensu
       - url: http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-        id:  6026DFCA
+        id:  056E8E56
       - keyserver: keyserver.ubuntu.com
         id: BC19DDBA
 
@@ -58,7 +58,7 @@
                   'url': 'http://deb.bearstech.com/bearstech-archive.gpg'
               },
               {
-                  'id': '6026DFCA',
+                  'id': '056E8E56',
                   'url': 'http://www.rabbitmq.com/rabbitmq-signing-key-public.asc'
               },
               {
@@ -76,6 +76,6 @@
               {
                   'id': '5072E1F5',
                   'url': 'http://pgp.mit.edu/pks/lookup?op=get&search=0x8C718D3B5072E1F5'
-              },
+              }
             ]
           }}"

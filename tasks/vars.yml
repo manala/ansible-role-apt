@@ -86,3 +86,23 @@
       |list
   }}"
   register: __manala_apt_keys_results
+
+- name: vars > Packages
+  set_fact:
+    __item: "{{
+      ((__manala_apt_packages_results|default({'ansible_facts':{'__item':{}}})).ansible_facts.__item)|combine(
+        (
+          {
+            item: {
+              'package': item
+            }
+          }
+        ) if (item is string) else (
+          {
+            item.package: item
+          }
+        )
+      )
+    }}"
+  with_items: "{{ manala_apt_packages }}"
+  register: __manala_apt_packages_results

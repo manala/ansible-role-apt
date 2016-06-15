@@ -47,5 +47,7 @@
 
 # Packages
 - include: packages.yml
+  vars:
+    __manala_apt_packages: "{{ (__manala_apt_packages_results.results|last).ansible_facts.__item.values() if (__manala_apt_packages_results.results|length) else [] }}"
   tags:
     - manala_apt
