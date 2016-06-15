@@ -48,34 +48,34 @@
     - assert:
         that:
           - "{{
-            ((__manala_apt_keys_results.results|last).ansible_facts.__item.values() if (__manala_apt_keys_results.results|length) else []) == [
+            ((__manala_apt_keys_results.results|last).ansible_facts.__item.values() if (__manala_apt_keys_results.results|length) else [])|sort == [
               {
-                  'id': 'EB9C94BB',
-                  'url': 'http://repositories.sensuapp.org/apt/pubkey.gpg'
+                'id': '056E8E56',
+                'url': 'http://www.rabbitmq.com/rabbitmq-signing-key-public.asc'
               },
               {
-                  'id': '90158EE0',
-                  'url': 'http://deb.bearstech.com/bearstech-archive.gpg'
+                'id': '5072E1F5',
+                'url': 'http://pgp.mit.edu/pks/lookup?op=get&search=0x8C718D3B5072E1F5'
               },
               {
-                  'id': '056E8E56',
-                  'url': 'http://www.rabbitmq.com/rabbitmq-signing-key-public.asc'
+                'id': '7BD9BF62',
+                'url': 'http://nginx.org/keys/nginx_signing.key'
               },
               {
-                  'id': '89DF5277',
-                  'url': 'http://www.dotdeb.org/dotdeb.gpg'
+                'id': '89DF5277',
+                'url': 'http://www.dotdeb.org/dotdeb.gpg'
               },
               {
-                  'id': 'BC19DDBA',
-                  'keyserver': 'keyserver.ubuntu.com'
+                'id': '90158EE0',
+                'url': 'http://deb.bearstech.com/bearstech-archive.gpg'
               },
               {
-                  'id': '7BD9BF62',
-                  'url': 'http://nginx.org/keys/nginx_signing.key'
+                'id': 'BC19DDBA',
+                'keyserver': 'keyserver.ubuntu.com'
               },
               {
-                  'id': '5072E1F5',
-                  'url': 'http://pgp.mit.edu/pks/lookup?op=get&search=0x8C718D3B5072E1F5'
+                'id': 'EB9C94BB',
+                'url': 'http://repositories.sensuapp.org/apt/pubkey.gpg'
               }
             ]
           }}"

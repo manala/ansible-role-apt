@@ -25,12 +25,18 @@
     - assert:
         that:
           - "{{
-            ((__manala_apt_preferences_results.results|last).ansible_facts.__item.values() if (__manala_apt_preferences_results.results|length) else []) == [
+            ((__manala_apt_preferences_results.results|last).ansible_facts.__item.values() if (__manala_apt_preferences_results.results|length) else [])|sort == [
               {
                 'file': 'dotdeb',
                 'package': '*',
                 'pin': 'origin packages.dotdeb.org',
                 'priority': 200
+              },
+              {
+                'file': 'foo',
+                'package': '*',
+                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
+                'priority': 900
               },
               {
                 'file': 'foo_bar',
@@ -41,12 +47,6 @@
               {
                 'file': 'git',
                 'package': 'git git-*',
-                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
-                'priority': 900
-              },
-              {
-                'file': 'foo',
-                'package': '*',
                 'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
                 'priority': 900
               },

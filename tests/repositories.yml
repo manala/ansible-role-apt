@@ -39,7 +39,7 @@
     - assert:
         that:
           - "{{
-            __manala_apt_preferences_repositories_results.results|map(attribute='ansible_facts.__item')|list == [
+            __manala_apt_preferences_repositories_results.results|map(attribute='ansible_facts.__item')|list|sort == [
               'debian_backports',
               'debian_backports',
               'dotdeb',
@@ -48,7 +48,13 @@
             ]
           }}"
           - "{{
-            ((__manala_apt_repositories_results.results|last).ansible_facts.__item.values() if (__manala_apt_repositories_results.results|length) else []) == [
+            ((__manala_apt_repositories_results.results|last).ansible_facts.__item.values() if (__manala_apt_repositories_results.results|length) else [])|sort == [
+              {
+                'source': 'deb http://packages.elastic.co/elasticsearch/1.7/debian stable main'
+              },
+              {
+                'source': 'deb http://security.debian.org/ ' ~ ansible_distribution_release ~ '/updates main'
+              },
               {
                 'key': {
                   'id': '5072E1F5',
@@ -57,26 +63,20 @@
                 'source': 'deb http://apt.postgresql.org/pub/repos/apt/ ' ~ ansible_distribution_release ~ '-pgdg main'
               },
               {
-                'key': 'dotdeb',
-                'source': 'deb http://packages.dotdeb.org ' ~ ansible_distribution_release ~ ' all'
-              },
-              {
                 'key': 'bearstech',
                 'source': 'deb http://deb.bearstech.com/debian ' ~ ansible_distribution_release ~ '-bearstech main'
               },
               {
-                'source': 'deb http://packages.elastic.co/elasticsearch/1.7/debian stable main'
-              },
-              {
-                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
-                'source': 'deb http://httpredir.debian.org/debian ' ~ ansible_distribution_release ~ '-backports main'
+                'key': 'dotdeb',
+                'source': 'deb http://packages.dotdeb.org ' ~ ansible_distribution_release ~ ' all'
               },
               {
                 'key': 'nginx',
                 'source': 'deb http://nginx.org/packages/debian/ ' ~ ansible_distribution_release ~ ' nginx'
               },
               {
-                'source': 'deb http://security.debian.org/ ' ~ ansible_distribution_release ~ '/updates main'
+                'pin': 'release a=' ~ ansible_distribution_release ~ '-backports',
+                'source': 'deb http://httpredir.debian.org/debian ' ~ ansible_distribution_release ~ '-backports main'
               }
             ]
           }}"
