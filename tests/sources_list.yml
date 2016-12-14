@@ -10,9 +10,9 @@
     - copy:
         dest: /etc/apt/sources.list
         content: |
-          deb http://deb.debian.org/debian jessie main
-          deb http://deb.debian.org/debian jessie-updates main
-          deb http://security.debian.org jessie/updates main
+          deb http://deb.debian.org/debian {{ ansible_distribution_release }} main
+          deb http://deb.debian.org/debian {{ ansible_distribution_release }}-updates main
+          deb http://security.debian.org {{ ansible_distribution_release }}/updates main
   roles:
     - manala.apt
   post_tasks:
@@ -24,6 +24,6 @@
               exists:   true
               filetype: file
               contains:
-                - "deb http://httpredir.debian.org/debian jessie main"
-                - "deb http://security.debian.org/ jessie/updates main"
-                - "deb http://httpredir.debian.org/debian jessie-updates main"
+                - "deb http://httpredir.debian.org/debian {{ ansible_distribution_release }} main"
+                - "deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main"
+                - "deb http://httpredir.debian.org/debian {{ ansible_distribution_release }}-updates main"

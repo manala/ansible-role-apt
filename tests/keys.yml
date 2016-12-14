@@ -39,6 +39,7 @@
         id: BC19DDBA
   pre_tasks:
     - command: apt-key del {{ item }}
+      ignore_errors: true
       with_items:
         - 89DF5277
         - 7BD9BF62
