@@ -51,3 +51,5 @@
   apt:
     update_cache: true
   when: __manala_apt_repositories_results|changed or __manala_apt_repositories_exclusive_results|changed
+  tags:
+    - skip_ansible_lint
