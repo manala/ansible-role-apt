@@ -88,7 +88,7 @@ test@jessie:
 	printf "${COLOR_INFO}Run docker...${COLOR_RESET}\n"
 	$(DOCKER)
 
-test: test-dependencies test-sources-list test-preferences test-keys test-repositories test-packages
+test: test-dependencies test-sources-list test-preferences test-keys test-repositories test-update test-packages
 
 test-dependencies:
 	ansible-playbook tests/dependencies.yml --syntax-check
@@ -109,6 +109,10 @@ test-keys:
 test-repositories:
 	ansible-playbook tests/repositories.yml --syntax-check
 	ansible-playbook tests/repositories.yml
+
+test-update:
+	ansible-playbook tests/update.yml --syntax-check
+	ansible-playbook tests/update.yml
 
 test-packages:
 	ansible-playbook tests/packages.yml --syntax-check
