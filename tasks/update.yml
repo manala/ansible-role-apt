@@ -3,6 +3,7 @@
 - name: udate > Backup package marks
   shell: "dpkg --get-selections {{ item }} | cut -f 2- | tr -d '\t'"
   with_items: "{{ manala_apt_update_holds }}"
+  when: manala_apt_update_holds|length
   register: __manala_apt_update_marks_results
 
 - name: udate > Hold packages

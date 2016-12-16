@@ -10,6 +10,3 @@
       - unzip
   roles:
     - manala.apt
-  tasks:
-    - debug:
-        var: ansible_connection
