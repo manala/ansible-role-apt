@@ -22,7 +22,9 @@ manala_apt_preferences:           []
 manala_apt_keys: []
 
 # Update
-manala_apt_update_holds: []
+manala_apt_update_holds: "{{
+  (ansible_connection == 'local')|ternary(['ansible'],[])
+}}" # Hold ansible package update when ansible itself runs in local
 
 # Packages
 manala_apt_packages: []
