@@ -9,7 +9,7 @@
         state: absent
       - package: telnet
         state: present
-      - package: 9mount
+      - package: pwgen
         state: absent
   pre_tasks:
     - apt:
@@ -22,7 +22,7 @@
         name:  "{{ item }}"
         state: present
       with_items:
-        - 9mount
+        - pwgen
   roles:
     - manala.apt
   post_tasks:
@@ -35,5 +35,5 @@
               installed: true
             telnet:
               installed: true
-            9mount:
+            pwgen:
               installed: false
