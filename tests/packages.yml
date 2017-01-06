@@ -9,6 +9,8 @@
         state: absent
       - package: telnet
         state: present
+      - package: 9mount
+        state: absent
   pre_tasks:
     - apt:
         name:  "{{ item }}"
@@ -16,6 +18,11 @@
       with_items:
         - ecl-doc
         - telnet
+    - apt:
+        name:  "{{ item }}"
+        state: present
+      with_items:
+        - 9mount
   roles:
     - manala.apt
   post_tasks:
@@ -28,3 +35,5 @@
               installed: true
             telnet:
               installed: true
+            9mount:
+              installed: false
