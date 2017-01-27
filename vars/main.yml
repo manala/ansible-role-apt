@@ -142,6 +142,12 @@ manala_apt_repositories_patterns:
   yarn:
     source: deb http://dl.yarnpkg.com/debian/ stable main
     key: yarn
+  sury_php_debian:
+    source: deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main
+    key: sury
+  sury_php_ubuntu:
+    source: ppa:ondrej/php
+    key: sury
 
 # Keys
 manala_apt_keys_patterns:
@@ -222,12 +228,18 @@ manala_apt_keys_patterns:
   yarn:
     url: http://dl.yarnpkg.com/debian/pubkey.gpg
     id:  86E50310
+  sury_php_debian:
+    url: https://packages.sury.org/php/apt.gpg
+    id: 4A7A714D
+  sury_php_ubuntu:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: E5267A6C
 
 # Preferences
 manala_apt_preferences_patterns:
   vim:                vim*
   git:                git git-*
-  php:                php-* php5-* php7.0-*
+  php:                php-* php5-* php7.0-* php7.1-*
   mysql:              mysql* libmysql*
   nginx:              nginx*
   ruby:               ruby*
