@@ -144,10 +144,10 @@ manala_apt_repositories_patterns:
     key: yarn
   sury_php_debian:
     source: deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main
-    key: sury
+    key:    sury_php_debian
   sury_php_ubuntu:
     source: ppa:ondrej/php
-    key: sury
+    key:    sury_php_ubuntu
 
 # Keys
 manala_apt_keys_patterns:
