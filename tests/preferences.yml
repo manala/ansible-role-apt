@@ -55,7 +55,7 @@
               exists:   true
               filetype: file
               contains:
-                - "Package:      php-* php5-* php7.0-*"
+                - "Package:      dh-php libapache2-mod-php* libphp* php php-* /^php[1-9]+/ pkg-php-tools"
                 - "Pin:          origin packages.dotdeb.org"
                 - "Pin-Priority: 300"
             /etc/apt/preferences.d/dotdeb:
