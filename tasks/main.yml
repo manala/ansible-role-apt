@@ -6,35 +6,65 @@
     - manala_apt
 
 # Sources list
-- include: sources_list.yml
-  when: (manala_apt_sources_list_template is not none) or (manala_apt_sources_list|length)
+- name: sources_list
+  include: sources_list.yml
+  static: false
+  when: "{{
+    (manala_apt_sources_list_template is not none) or (manala_apt_sources_list|length)
+  }}"
   tags:
     - manala_apt
 
 # Preferences
-- include: preferences.yml
+- name: preferences
+  include: preferences.yml
+  static: false
+  when: "{{
+    manala_apt_preferences|length
+    or manala_apt_preferences_exclusive
+  }}"
   tags:
     - manala_apt
 
 # Keys
-- include: keys.yml
+- name: keys
+  include: keys.yml
+  static: false
+  when: "{{
+    manala_apt_keys|length or manala_apt_repositories|length or manala_apt_preferences|length
+  }}"
   tags:
     - manala_apt
 
 # Repositories
-- include: repositories.yml
+- name: repositories
+  include: repositories.yml
+  static: false
+  when: "{{
+    manala_apt_repositories|length or manala_apt_preferences|length
+    or manala_apt_repositories_exclusive
+  }}"
   tags:
     - manala_apt
 
-# # Update
-- include: update.yml
-  when: "{{ manala_apt['update']|default(false) }}"
+# Update
+- name: update
+  include: update.yml
+  static: false
+  when: "{{
+    manala_apt['update']|default(false)
+  }}"
   tags:
     - manala_apt
     - manala_apt.update
     - manala.update
 
 # Packages
-- include: packages.yml
+- name: packages
+  include: packages.yml
+  static: false
+  when: "{{
+    manala_apt_packages|length
+  }}"
   tags:
     - manala_apt
