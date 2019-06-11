@@ -4,6 +4,8 @@
   shell: |
     set -o pipefail
     dpkg --get-selections {{ item }} | cut -f 2- | tr -d '\t'
+  args:
+    executable: /bin/bash
   with_items: "{{ manala_apt_update_holds }}"
   when:
     - manala_apt_update_holds|length
@@ -13,6 +15,8 @@
   shell:
     set -o pipefail
     echo '{{ item.0 }} hold' | dpkg --set-selections
+  args:
+    executable: /bin/bash
   when:
     - ( item.1 | length > 0 )
     - ( item.1 != 'hold' )
@@ -29,6 +33,8 @@
   shell: |
     set -o pipefail
     echo '{{ item.0 }} {{ item.1 }}' | dpkg --set-selections
+  args:
+    executable: /bin/bash
   when:
     - ( item.1 | length > 0 )
   with_together:
