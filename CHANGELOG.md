@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Ansible repository & key pattern
 
+## [1.0.43] - 2019-11-06
+### Added
+- Ansible repository & key pattern
+
 ## [1.0.42] - 2019-10-24
 ### Added
 - MySQL 8 repository pattern
