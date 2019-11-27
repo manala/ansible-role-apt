@@ -1,0 +1,64 @@
+---
+
+file:
+{{ if eq .Env.DISTRIBUTION_RELEASE "jessie" "stretch" }}
+  /etc/apt/preferences.d.test/dotdeb:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      *"
+      - "Pin:          origin packages.dotdeb.org"
+      - "Pin-Priority: 200"
+  /etc/apt/preferences.d.test/php:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      php-* php5-* php5.6-* php7.0-* php7.1-* php7.2-* php7.3-*"
+      - "Pin:          origin packages.dotdeb.org"
+      - "Pin-Priority: 300"
+{{ else }}
+  /etc/apt/preferences.d.test/sury_php:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      *"
+      - "Pin:          origin packages.sury.org"
+      - "Pin-Priority: 200"
+  /etc/apt/preferences.d.test/php:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      php-* php5-* php5.6-* php7.0-* php7.1-* php7.2-* php7.3-*"
+      - "Pin:          origin packages.sury.org"
+      - "Pin-Priority: 300"
+{{ end }}
+  /etc/apt/preferences.d.test/git:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      git git-*"
+      - "Pin:          release a={{ .Env.DISTRIBUTION_RELEASE }}-backports"
+      - "Pin-Priority: 900"
+  /etc/apt/preferences.d.test/libssl1_0_0:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      libssl1.0.0"
+      - "Pin:          release a={{ .Env.DISTRIBUTION_RELEASE }}-backports"
+      - "Pin-Priority: 900"
+  /etc/apt/preferences.d.test/foo_foo:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      foo"
+      - "Pin:          foo"
+      - "Pin-Priority: 100"
+  /etc/apt/preferences.d.test/bar_bar:
+    exists:   true
+    filetype: file
+    contains:
+      - "Package:      bar"
+      - "Pin:          bar"
+      - "Pin-Priority: 100"
+  /etc/apt/preferences.d.test/baz_baz:
+    exists: false

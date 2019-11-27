@@ -1,0 +1,43 @@
+---
+
+- name: packages > Deb present
+  apt:
+    deb: "{{ item }}"
+  with_items: "{{ lookup(
+      'manala_apt_packages',
+      manala_apt_packages,
+      wantstate='present',
+      wantmap=True,
+      wantdeb=True,
+      wantlist=True
+    )
+  }}"
+
+- name: packages > Packages present
+  apt:
+    name: "{{ lookup(
+        'manala_apt_packages',
+        manala_apt_packages,
+        wantstate='present',
+        wantmap=True,
+        wantdeb=False,
+        wantlist=True
+      )
+    }}"
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   "{{ manala_apt_cache_valid_time }}"
+
+- name: packages > Packages absent
+  apt:
+    name: "{{ lookup(
+        'manala_apt_packages',
+        manala_apt_packages,
+        wantstate='absent',
+        wantmap=True,
+        wantlist=True
+      )
+    }}"
+    state: absent
+    purge:      true
+    autoremove: true

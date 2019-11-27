@@ -1,0 +1,17 @@
+---
+
+package:
+  e3:
+    installed: true
+  telnet:
+    installed: true
+  pwgen:
+    installed: false
+  spinner:
+    installed: true
+    versions:
+      - 1.2.4-3
+  wait-for-it:
+    installed: true
+  pscan:
+    installed: false

@@ -1,0 +1,45 @@
+---
+
+- name: preferences > Directory
+  file:
+    path: "{{ manala_apt_preferences_dir }}"
+    state: directory
+
+- name: preferences > Exclusive
+  find:
+    path: "{{ manala_apt_preferences_dir }}"
+  changed_when: false
+  register: __manala_apt_preferences_exclusive_find
+  when: manala_apt_preferences_exclusive
+
+- name: preferences > Templates presents
+  template:
+    src:  preferences/default.j2
+    dest: "{{ item.file }}"
+  with_items: "{{ lookup(
+      'manala_apt_preferences',
+      manala_apt_preferences,
+      manala_apt_preferences_patterns,
+      manala_apt_repositories_patterns,
+      __manala_apt_preferences_exclusive_find.files|default([]),
+      manala_apt_preferences_dir,
+      wantlist=True,
+      wantstate='present'
+    )
+  }}"
+
+- name: preferences > Files absents
+  file:
+    path:  "{{ item.file }}"
+    state: absent
+  with_items: "{{ lookup(
+      'manala_apt_preferences',
+      manala_apt_preferences,
+      manala_apt_preferences_patterns,
+      manala_apt_repositories_patterns,
+      __manala_apt_preferences_exclusive_find.files|default([]),
+      manala_apt_preferences_dir,
+      wantlist=True,
+      wantstate='absent'
+    )
+  }}"

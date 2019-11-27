@@ -1,0 +1,47 @@
+---
+
+- name: repositories > Exclusive
+  find:
+    path: /etc/apt/sources.list.d
+    patterns: "*.list"
+  changed_when: false
+  register: __manala_apt_repositories_exclusive_find
+  when: manala_apt_repositories_exclusive
+
+- name: repositories > Repositories presents
+  apt_repository:
+    repo:     "{{ item.source }}"
+    filename: "{{ (item.file|basename|splitext)[0] }}"
+    update_cache: false
+  with_items: "{{ lookup(
+      'manala_apt_repositories',
+      manala_apt_repositories,
+      manala_apt_repositories_patterns,
+      manala_apt_preferences,
+      __manala_apt_repositories_exclusive_find.files|default([]),
+      wantlist=True,
+      wantstate='present'
+    )
+  }}"
+  register: __manala_apt_repositories_presents_results
+
+- name: repositories > Repositories absents
+  file:
+    path:  "{{ item.file }}"
+    state: absent
+  with_items: "{{ lookup(
+      'manala_apt_repositories',
+      manala_apt_repositories,
+      manala_apt_repositories_patterns,
+      manala_apt_preferences,
+      __manala_apt_repositories_exclusive_find.files|default([]),
+      wantlist=True,
+      wantstate='absent'
+    )
+  }}"
+  register: __manala_apt_repositories_absents_results
+
+- name: repositories > Update cache
+  apt:
+    update_cache: true
+  when: __manala_apt_repositories_presents_results is changed or __manala_apt_repositories_absents_results is changed
